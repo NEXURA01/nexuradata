@@ -5,7 +5,7 @@
  * simulate the D1 API (prepare → bind → run/first/all) and the external
  * email/Stripe APIs.
  */
-import { describe, it } from "node:test";
+import { describe, it, before } from "node:test";
 import assert from "node:assert/strict";
 
 // ---------------------------------------------------------------------------
@@ -497,5 +497,4 @@ describe("ops/follow-up handler", () => {
   });
 });
 
-// We need `before` from node:test – import it at the top
-import { before } from "node:test";
+// We need `before` from node:test – already imported at the top of this file.
