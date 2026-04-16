@@ -1,5 +1,5 @@
 /**
- * Tests for API handlers (intake, status, stripe-webhook, ops/cases, ops/payments, ops/quotes).
+ * Tests for API handlers (intake, status, stripe-webhook, ops/cases, ops/payments, ops/quotes, ops/follow-up).
  *
  * Since these handlers require a D1 database, we build lightweight mocks that
  * simulate the D1 API (prepare → bind → run/first/all) and the external
