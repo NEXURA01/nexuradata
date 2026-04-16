@@ -1,0 +1,4 @@
+Contact: mailto:contact@nexuradata.ca
+Canonical: https://nexuradata.ca/.well-known/security.txt
+Preferred-Languages: fr, en
+Expires: 2027-04-04T00:00:00.000Z

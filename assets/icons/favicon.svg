@@ -1,0 +1,13 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">NEXURADATA</title>
+  <desc id="desc">Marque N — barres dégradées et diagonale sur fond sombre.</desc>
+  <rect width="64" height="64" rx="14" fill="#0d0d0b"/>
+  <g transform="translate(12, 12)">
+    <rect x="0" y="0" width="3.2" height="40" fill="#e8e4dc" opacity="1"/>
+    <rect x="10" y="0" width="3.2" height="40" fill="#e8e4dc" opacity="0.55"/>
+    <rect x="20" y="0" width="3.2" height="40" fill="#e8e4dc" opacity="0.22"/>
+    <rect x="30" y="0" width="3.2" height="40" fill="#e8e4dc" opacity="0.08"/>
+    <line x1="0" y1="0" x2="40" y2="40" stroke="#e8e4dc" stroke-width="2.8" stroke-linecap="butt"/>
+    <rect x="37" y="0" width="3.2" height="40" fill="#e8e4dc" opacity="1"/>
+  </g>
+</svg>

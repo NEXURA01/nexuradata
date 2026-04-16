@@ -1,0 +1,18 @@
+{
+  "name": "NEXURADATA",
+  "short_name": "NEXURADATA",
+  "description": "Laboratoire de recuperation de donnees et forensique numerique a Montreal.",
+  "lang": "fr-CA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141618",
+  "theme_color": "#141618",
+  "icons": [
+    {
+      "src": "assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Client Case Status | NEXURADATA Montreal</title>
+  <meta name="description" content="Check your data recovery case status at NEXURADATA Montreal. Enter your case number and secure access code to view current progress.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0d0d0b">
+  <meta name="author" content="NEXURADATA">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:site_name" content="NEXURADATA">
+  <meta property="og:image" content="https://nexuradata.ca/assets/icons/og-default.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NEXURADATA — Data Recovery in Montreal">
+  <meta property="og:title" content="Client Case Status | NEXURADATA Montreal">
+  <meta property="og:description" content="Check your data recovery case status at NEXURADATA Montreal. Enter your case number and secure access code to view current progress.">
+  <meta property="og:url" content="https://nexuradata.ca/en/suivi-dossier-client-montreal.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Client Case Status | NEXURADATA Montreal">
+  <meta name="twitter:description" content="Check your data recovery case status at NEXURADATA Montreal. Enter your case number and secure access code to view current progress.">
+  <meta name="twitter:image" content="https://nexuradata.ca/assets/icons/og-default.png">
+  <link rel="canonical" href="https://nexuradata.ca/en/suivi-dossier-client-montreal.html">
+  <link rel="alternate" hreflang="fr-CA" href="https://nexuradata.ca/suivi-dossier-client-montreal.html">
+  <link rel="alternate" hreflang="en-CA" href="https://nexuradata.ca/en/suivi-dossier-client-montreal.html">
+  <link rel="alternate" hreflang="x-default" href="https://nexuradata.ca/en/suivi-dossier-client-montreal.html">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script src="../assets/js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a class="brand" href="/en/" aria-label="NEXURA DATA home">
+          <img src="/assets/icons/logo-petit.svg" alt="NEXURA DATA" class="brand-logo">
+        </a>
+        <div class="nav-links">
+          <a href="/en/forensique-numerique-montreal.html">Services</a>
+          <a href="/en/tarifs-recuperation-donnees-montreal.html">Pricing</a>
+          <a href="/en/politique-confidentialite.html">Privacy</a>
+          <a href="/en/conditions-intervention-paiement.html">Terms</a>
+          <a href="/en/#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main id="content" class="page-shell">
+    <div class="container">
+      <header class="page-hero">
+        <p class="eyebrow">Client portal</p>
+        <h1>Track the status of your request</h1>
+        <p class="page-intro">
+          Access requires a case number and access code provided by NEXURADATA. The portal only shows
+          the useful status of the file and avoids exposing unnecessary sensitive detail.
+        </p>
+      </header>
+      <div class="status-layout">
+        <section class="page-card status-gate">
+          <h2>Access case status</h2>
+          <form class="status-form" data-status-form data-status-endpoint="/api/status" novalidate>
+            <label class="field">
+              <span>Case number</span>
+              <input type="text" name="dossier" placeholder="Example: NX-2026-0412" required>
+            </label>
+            <label class="field">
+              <span>Access code</span>
+              <input type="password" name="code" placeholder="Code provided by NEXURADATA" required>
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="button button-primary">Check case status</button>
+              <a href="mailto:contact@nexuradata.ca?subject=NEXURADATA%20case%20status%20request" class="button button-secondary">Request an update</a>
+            </div>
+            <p class="form-note">
+              The portal only exposes the current case state. Without valid access, no case information
+              is returned. Sensitive details remain outside the public client portal.
+            </p>
+            <p class="form-status" data-status-form-message aria-live="polite"></p>
+          </form>
+        </section>
+        <aside class="contact-rail">
+          <article class="contact-card">
+            <h3>Visible statuses</h3>
+            <ul class="contact-list">
+              <li>Case received</li>
+              <li>Assessment in progress</li>
+              <li>Quote sent</li>
+              <li>Intervention authorized</li>
+              <li>Recovery work in progress</li>
+              <li>Return or delivery scheduled</li>
+            </ul>
+          </article>
+          <article class="contact-card">
+            <h3>Privacy</h3>
+            <p>The portal should remain limited to case status, next steps and information necessary for the client concerned.</p>
+          </article>
+          <article class="contact-card">
+            <h3>Urgent change</h3>
+            <a href="mailto:contact@nexuradata.ca?subject=Urgent%20update%20for%20a%20NEXURADATA%20case">contact@nexuradata.ca</a>
+            <p>Phone line is still being activated. Use email if the urgency level changed after the case was opened.</p>
+          </article>
+        </aside>
+      </div>
+      <section class="status-panel page-card" data-status-panel hidden>
+        <div class="status-panel-head">
+          <div>
+            <p class="guide-meta">Case</p>
+            <h2 data-status-case>NX-0000-0000</h2>
+          </div>
+          <div class="status-badge" data-status-badge>Status</div>
+        </div>
+        <div class="status-meta">
+          <p><strong>Last update:</strong> <span data-status-updated></span></p>
+          <p><strong>Support:</strong> <span data-status-support></span></p>
+          <p><strong>Next step:</strong> <span data-status-next></span></p>
+        </div>
+        <p class="status-summary" data-status-summary></p>
+        <section class="status-section" data-status-payments-section hidden>
+          <div class="status-section-head">
+            <div>
+              <p class="guide-meta">Payment</p>
+              <h3>Quote and payment</h3>
+            </div>
+            <p class="status-section-note">When a deposit or balance is open for this case, it appears here with its status.</p>
+          </div>
+          <div class="status-payment-list" data-status-payments></div>
+        </section>
+        <div class="status-timeline" data-status-timeline></div>
+      </section>
+      <section class="page-grid">
+        <section class="page-card page-content">
+          <h2>What the client should see</h2>
+          <ul>
+            <li>The current case status.</li>
+            <li>The latest available update.</li>
+            <li>The next concrete step.</li>
+            <li>An active payment request, if a deposit or balance has been issued.</li>
+            <li>A clear contact path if the situation changes.</li>
+          </ul>
+        </section>
+        <section class="page-card page-content">
+          <h2>What the portal should not expose publicly</h2>
+          <ul>
+            <li>Recovered data or detailed inventories without stronger access control.</li>
+            <li>Sensitive evidence, captures or technical material not required for status tracking.</li>
+            <li>Information about other clients or internal operating details.</li>
+          </ul>
+        </section>
+      </section>
+      <div class="page-links">
+        <a class="button button-primary" href="index.html#contact">Open a new case</a>
+        <a class="button button-secondary" href="engagements-conformite-quebec.html">View our compliance commitments</a>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <section class="footer-top" aria-label="Identity and information">
+        <img src="/assets/nexuradata-master.svg" alt="NEXURA DATA" class="footer-logo">
+      </section>
+
+      <section class="footer-grid" aria-label="Site information">
+        <div class="footer-block">
+          <small>SERVICES</small>
+          <p>Data recovery, RAID, NAS, servers and digital forensics.</p>
+        </div>
+
+        <div class="footer-block">
+          <small>LOCATION</small>
+          <p>Montreal, Quebec, Canada</p>
+        </div>
+
+        <div class="footer-block">
+          <small>EMAIL</small>
+          <p><a href="mailto:contact@nexuradata.ca">contact@nexuradata.ca</a></p>
+        </div>
+
+        <div class="footer-block">
+          <small>PRIVACY</small>
+          <p><a href="mailto:privacy@nexuradata.ca">privacy@nexuradata.ca</a></p>
+        </div>
+      </section>
+
+      <section class="footer-legal" aria-label="Legal links">
+        <a href="/en/mentions-legales.html">Legal notice</a>
+        <a href="/en/politique-confidentialite.html">Privacy policy</a>
+        <a href="/en/engagements-conformite-quebec.html">Quebec commitments</a>
+        <a href="/en/conditions-intervention-paiement.html">Terms of service</a>
+      </section>
+
+      <section class="footer-note" aria-label="Operating note">
+        <p>
+          NEXURA DATA operates in Canada in data recovery and specialized analysis.
+          All interventions are performed following a prior assessment and after
+          validation of the applicable terms.
+        </p>
+      </section>
+    </div>
+  </footer>
+</body>
+</html>

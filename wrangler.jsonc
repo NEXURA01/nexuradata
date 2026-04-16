@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nexuradata",
+  "pages_build_output_dir": "./release-cloudflare",
+  "compatibility_date": "2026-04-04",
+  "d1_databases": [
+    {
+      "binding": "INTAKE_DB",
+      "database_name": "nexuradata-launch",
+      "database_id": "0b16daf7-2de8-490a-857e-23d34d718dcc",
+      "preview_database_id": "c246c5c8-c476-4afe-b393-349679d432f5",
+      "migrations_dir": "./migrations"
+    }
+  ],
+  "vars": {
+    "PUBLIC_SITE_ORIGIN": "https://nexuradata.ca",
+    "LAB_INBOX_EMAIL": "o.blanchet13@gmail.com",
+    "RESEND_FROM_EMAIL": "NEXURADATA <dossiers@nexuradata.ca>",
+    "OPS_ACCESS_ALLOWED_DOMAIN": "nexuradata.ca"
+  }
+}

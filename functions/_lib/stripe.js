@@ -1,0 +1,186 @@
+const STRIPE_API_BASE = "https://api.stripe.com/v1";
+const STRIPE_API_VERSION = "2026-02-25.clover";
+
+const normalizeString = (value, maxLength = 500) => {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value.trim().slice(0, maxLength);
+};
+
+const ensureSecret = (value, label) => {
+  const normalized = normalizeString(value, 256);
+
+  if (!normalized) {
+    throw new Error(`${label} n'est pas encore configuré.`);
+  }
+
+  return normalized;
+};
+
+const buildBody = (entries) => {
+  const body = new URLSearchParams();
+
+  for (const [key, value] of entries) {
+    if (typeof value === "undefined" || value === null || value === "") {
+      continue;
+    }
+
+    body.append(key, `${value}`);
+  }
+
+  return body;
+};
+
+const stripeFetch = async (env, path, options = {}) => {
+  const secretKey = ensureSecret(env?.STRIPE_SECRET_KEY, "Stripe");
+  const response = await fetch(`${STRIPE_API_BASE}${path}`, {
+    method: options.method || "GET",
+    headers: {
+      Authorization: `Bearer ${secretKey}`,
+      "Stripe-Version": STRIPE_API_VERSION,
+      ...(options.contentType ? { "content-type": options.contentType } : {}),
+      ...(options.idempotencyKey ? { "Idempotency-Key": options.idempotencyKey } : {})
+    },
+    body: options.body
+  });
+
+  const text = await response.text();
+  let data = null;
+
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = null;
+  }
+
+  if (!response.ok) {
+    const message = data?.error?.message || text || `Erreur Stripe ${response.status}.`;
+    throw new Error(message);
+  }
+
+  return data;
+};
+
+export const createHostedCheckoutSession = async (env, payload) => {
+  const body = buildBody([
+    ["mode", "payment"],
+    ["locale", "fr"],
+    ["success_url", payload.successUrl],
+    ["cancel_url", payload.cancelUrl],
+    ["customer_email", payload.customerEmail],
+    ["client_reference_id", payload.paymentRequestId],
+    ["invoice_creation[enabled]", "true"],
+    ["line_items[0][quantity]", "1"],
+    ["line_items[0][price_data][currency]", payload.currency],
+    ["line_items[0][price_data][unit_amount]", payload.amountCents],
+    ["line_items[0][price_data][product_data][name]", payload.label],
+    ["line_items[0][price_data][product_data][description]", payload.description],
+    ["metadata[case_id]", payload.caseId],
+    ["metadata[payment_request_id]", payload.paymentRequestId],
+    ["metadata[payment_kind]", payload.paymentKind],
+    ["payment_intent_data[description]", `${payload.label} · ${payload.caseId}`],
+    ["payment_intent_data[receipt_email]", payload.customerEmail],
+    ["payment_intent_data[metadata][case_id]", payload.caseId],
+    ["payment_intent_data[metadata][payment_request_id]", payload.paymentRequestId],
+    ["payment_intent_data[metadata][payment_kind]", payload.paymentKind]
+  ]);
+
+  return stripeFetch(env, "/checkout/sessions", {
+    method: "POST",
+    body,
+    contentType: "application/x-www-form-urlencoded",
+    idempotencyKey: `checkout-session-${payload.paymentRequestId}`
+  });
+};
+
+const parseStripeSignature = (headerValue) => {
+  const parts = `${headerValue || ""}`.split(",");
+  const payload = {
+    timestamp: "",
+    signatures: []
+  };
+
+  for (const part of parts) {
+    const [rawKey, rawValue] = part.split("=");
+    const key = normalizeString(rawKey, 10);
+    const value = normalizeString(rawValue, 500);
+
+    if (!key || !value) {
+      continue;
+    }
+
+    if (key === "t") {
+      payload.timestamp = value;
+      continue;
+    }
+
+    if (key === "v1") {
+      payload.signatures.push(value);
+    }
+  }
+
+  return payload;
+};
+
+const toHex = (buffer) =>
+  Array.from(new Uint8Array(buffer), (byte) => byte.toString(16).padStart(2, "0")).join("");
+
+const timingSafeEqual = (left, right) => {
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  let mismatch = 0;
+
+  for (let index = 0; index < left.length; index += 1) {
+    mismatch |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  }
+
+  return mismatch === 0;
+};
+
+export const verifyStripeWebhook = async (env, request) => {
+  const webhookSecret = ensureSecret(env?.STRIPE_WEBHOOK_SECRET, "Le secret webhook Stripe");
+  const signatureHeader = request.headers.get("Stripe-Signature") || request.headers.get("stripe-signature");
+  const { timestamp, signatures } = parseStripeSignature(signatureHeader);
+
+  if (!timestamp || signatures.length === 0) {
+    throw new Error("Signature Stripe absente ou invalide.");
+  }
+
+  const timestampNumber = Number(timestamp);
+
+  if (!Number.isFinite(timestampNumber)) {
+    throw new Error("Horodatage Stripe invalide.");
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+
+  if (Math.abs(now - timestampNumber) > 300) {
+    throw new Error("Signature Stripe expirée.");
+  }
+
+  const rawBody = await request.text();
+  const signedPayload = `${timestamp}.${rawBody}`;
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(webhookSecret),
+    {
+      name: "HMAC",
+      hash: "SHA-256"
+    },
+    false,
+    ["sign"]
+  );
+  const digest = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(signedPayload));
+  const expected = toHex(digest);
+  const isValid = signatures.some((signature) => timingSafeEqual(signature, expected));
+
+  if (!isValid) {
+    throw new Error("Signature Stripe non valide.");
+  }
+
+  return rawBody ? JSON.parse(rawBody) : null;
+};

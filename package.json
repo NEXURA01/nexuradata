@@ -1,0 +1,26 @@
+{
+  "name": "nexuradata",
+  "private": true,
+  "config": {
+    "pagesProjectName": "nexuradata"
+  },
+  "scripts": {
+    "build": "node ./scripts/sync-release.mjs",
+    "cf:sync": "npm run build",
+    "cf:check": "npm run build && node ./scripts/pages-cli.mjs check",
+    "cf:d1:migrate:local": "wrangler d1 migrations apply nexuradata-launch --local",
+    "cf:d1:migrate:remote": "wrangler d1 migrations apply nexuradata-launch --remote",
+    "cf:d1:migrate:preview": "wrangler d1 migrations apply INTAKE_DB --remote --preview",
+    "cf:deploy": "npm run cf:pages:deploy:prod",
+    "cf:deploy:staging": "npm run cf:pages:deploy:staging",
+    "cf:dev": "npm run build && wrangler pages dev ./release-cloudflare --compatibility-date 2026-04-04 --live-reload",
+    "cf:pages:list": "wrangler pages project list",
+    "cf:pages:project:create": "node ./scripts/pages-cli.mjs create",
+    "cf:pages:deploy:prod": "npm run build && node ./scripts/pages-cli.mjs deploy-prod",
+    "cf:pages:deploy:staging": "npm run build && node ./scripts/pages-cli.mjs deploy-staging",
+    "cf:whoami": "wrangler whoami"
+  },
+  "devDependencies": {
+    "wrangler": "^4.80.0"
+  }
+}

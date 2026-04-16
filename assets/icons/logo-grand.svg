@@ -1,0 +1,14 @@
+<svg viewBox="0 0 500 90" xmlns="http://www.w3.org/2000/svg" width="500" height="90">
+  <g transform="translate(30, 22)">
+    <rect x="0" y="0" width="3" height="46" fill="#e8e4dc" opacity="1"/>
+    <rect x="9" y="0" width="3" height="46" fill="#e8e4dc" opacity="0.55"/>
+    <rect x="18" y="0" width="3" height="46" fill="#e8e4dc" opacity="0.22"/>
+    <rect x="27" y="0" width="3" height="46" fill="#e8e4dc" opacity="0.08"/>
+    <line x1="0" y1="0" x2="36" y2="46" stroke="#e8e4dc" stroke-width="2.5" stroke-linecap="butt"/>
+    <rect x="33" y="0" width="3" height="46" fill="#e8e4dc" opacity="1"/>
+    <text x="52" y="43" font-family="'Georgia', 'Times New Roman', serif" font-size="46" font-weight="400" letter-spacing="6" fill="#e8e4dc">EXURA</text>
+    <text x="330" y="43" font-family="'Georgia', 'Times New Roman', serif" font-size="15" font-weight="400" letter-spacing="8" fill="#e8e4dc" opacity="0.35">DATA</text>
+    <line x1="0" y1="56" x2="430" y2="56" stroke="#e8e4dc" stroke-width="0.5" opacity="0.12"/>
+    <text x="0" y="70" font-family="'Georgia', 'Times New Roman', serif" font-size="9" letter-spacing="4.5" fill="#e8e4dc" opacity="0.22">Récupération · RAID · Forensique · Montréal</text>
+  </g>
+</svg>

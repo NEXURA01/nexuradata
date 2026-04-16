@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /operations/
+Disallow: /api/ops/
+
+Sitemap: https://nexuradata.ca/sitemap.xml
