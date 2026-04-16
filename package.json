@@ -6,7 +6,7 @@
     "pagesProjectName": "nexuradata"
   },
   "scripts": {
-    "test": "node --test tests/**/*.test.js",
+    "test": "node --test \"tests/**/*.test.js\"",
     "build": "node ./scripts/sync-release.mjs",
     "cf:sync": "npm run build",
     "cf:check": "npm run build && node ./scripts/pages-cli.mjs check",
