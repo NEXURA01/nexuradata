@@ -1,12 +1,14 @@
-export const json = (payload, init = {}) =>
-  new Response(JSON.stringify(payload), {
+export const json = (payload, init = {}) => {
+  const { headers: extraHeaders, ...rest } = init;
+  return new Response(JSON.stringify(payload), {
     headers: {
       "content-type": "application/json; charset=UTF-8",
       "cache-control": "no-store",
-      ...init.headers
+      ...(extraHeaders || {})
     },
-    ...init
+    ...rest
   });
+};
 
 export const onOptions = (allow = "GET, POST, OPTIONS") =>
   new Response(null, {
